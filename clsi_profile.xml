@@ -1,15 +1,35 @@
-<tool id="clsi_profile" name="CLSI Profile" version="0.1.4" python_template_version="3.5">
+<tool id="clsi_profile" name="CLSI Profile" version="0.1.5" python_template_version="3.5">
     <description>MIC profile using CLSI MIC breakpoints</description>
     <requirements>
         <requirement type="package">pandas</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-	    python "${__tool_directory__}/clsi_profile.py" '$input1' '$input2' '$output1'
+	    python "${__tool_directory__}/clsi_profile.py" "$input1" "$input2" "$output1"
     ]]></command>
-    <inputs>
+	<inputs>
+	
+		<param name="input1" type="data" format="csv" label="Input file of Antimicrobial Susceptibility Testing (AST) MIC values for strains" help="Input AST file in CSV format (Please see example given below)"></param>
+	
+		<conditional name="input2">
+			<param name="type_selector" type="select" label="Choose MIC Breakpoints">
+				<option value="clsi_file">CLSI MIC breakpoints</option>
+				<option value="user_file" >User define MIC breakpoints</option>
+			</param>
+			<when value="clsi_file">
+				<param name="clsi1" type="select" format="csv" label="CSV File">
+					<option value="clsi.csv" selected="true">CLSI MIC breakpoints for Bacteria (2020)</option>
+				</param>
+			</when>
+			<when value="user_file">
+				<param name="clsi2" type="data" format="csv" label="CSV File"></param>
+			</when>
+		</conditional>
+	
+	</inputs> 
+    <!--inputs>
         <param type="data" name="input1" format="csv" />
         <param type="data" name="input2" format="csv" />
-    </inputs>
+    </inputs-->
     <outputs>
         <data name="output1" format="csv" />
     </outputs>
