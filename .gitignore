@@ -134,6 +134,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .tool_shed.sh.swp
-input.csv
-clsi.csv
-input.csv
