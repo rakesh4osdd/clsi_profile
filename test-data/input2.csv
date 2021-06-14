@@ -1,0 +1,29 @@
+id,genome Ids,Strain name,Antibiotics,Resistance_profile,sign,MIC,unit
+470,CP021782.1,Acinetobacter baumannii A85,Colistin,Susceptible ,NA,0.1,mg/L
+470,CP021782.1,Acinetobacter baumannii A85,Netilmicin,Susceptible ,NA,1,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Ampicillin,resistant,>=,0,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Ampicillin/sulbactam,susceptible,<=,mg/L,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,piperacillin/tazobactam,susceptible,<=,0,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Cefazolin,resistant,>=,64,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Ceftriaxone,susceptible,==,16,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Cefepime,susceptible,==,8,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Meropenem,susceptible,<=,0.25,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Imipenem,susceptible,<=,1,mg/L
+470,CP001172.2,Acinetobacter baumannii AB307-0294,Tigecycline,susceptible,<=,0.5,mg/L
+470,CP008706.1,Acinetobacter baumannii AB5075-UW,Ceftazidime,Resistant,NA,>128,mg/L
+470,CP008706.1,Acinetobacter baumannii AB5075-UW,Cefepime,Resistant,NA,>256,mg/L
+470,CP008706.1,Acinetobacter baumannii AB5075-UW,Ciprofloxacin,Resistant,NA,>32,mg/L
+470,CP017152.1,Acinetobacter baumannii DU202,colistin ,Susceptible,NA,,mg/L
+470,CP017152.1,Acinetobacter baumannii DU202,Ampicillin/sulbactam,Resistant,NA,>=0.3 mg/L,mg/L
+470,CP017152.1,Acinetobacter baumannii DU202,ticarcillin/clavulanic acid,Resistant,NA,>=128/2,mg/L
+470,CP017152.1,Acinetobacter baumannii DU202,piperacillin/tazobactam ,Resistant,NA,NA,mg/L
+470,CP017152.1,Acinetobacter baumannii DU202,trimethoprim/sulfamethoxazole,Resistant,NA,8/152,mg/L
+470,CP015483.1,Acinetobacter baumannii ORAB01,piperacillin/tazobactam,Resistant,NA,>64/4,mg/L
+470,470.7601,Acinetobacter baumannii strain MRSN7100,amoxicillin/clavulanic acid,Resistant,>, 16/8,mg/L
+470,470.7651,Acinetobacter baumannii strain MRSN7168,amoxicillin/clavulanic acid,Resistant,>, 16/8,mg/L
+470,470.7764,Acinetobacter baumannii strain MRSN7336,amoxicillin/clavulanic acid,Resistant,>, 16/8,mg/L
+470,470.8071,Acinetobacter baumannii strain MRSN7834,amoxicillin/clavulanic acid,Resistant,>, 16/8,mg/L
+470,470.7405,Acinetobacter baumannii strain FDA-CDC-AR_0305,polymyxin B,Susceptible,==,1,mg/L
+470,470.7406,Acinetobacter baumannii strain FDA-CDC-AR_0306,polymyxin B,Susceptible,==,1,mg/L
+470,470.7407,Acinetobacter baumannii strain FDA-CDC-AR_0307,polymyxin B,Resistant,==,8,mg/L
+470,470.7408,Acinetobacter baumannii strain FDA-CDC-AR_0308,polymyxin B,Resistant,==,4,mg/L
