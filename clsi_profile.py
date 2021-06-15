@@ -282,7 +282,7 @@ result_selected=result_table.filter(clsi_ab)
 # In[229]:
 
 
-result_selected.insert(0,'Resistance_phenotype','')
+#result_selected.insert(0,'Resistance_phenotype','')
 
 
 # In[230]:
