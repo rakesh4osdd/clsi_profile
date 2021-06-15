@@ -45,7 +45,29 @@
         </test>
     </tests>
     <help><![CDATA[
-        TODO: Fill in help.
+        Input CSV file example:
+	    Strain name,Antibiotics,MIC,unit
+
+	    Acinetobacter baumannii A85,Colistin,0.1,mg/L
+	   
+	    Acinetobacter baumannii strain FDA-CDC-AR_0306,polymyxin B,1,mg/L
+
+	    Acinetobacter baumannii strain FDA-CDC-AR_0307,polymyxin B,8,mg/L
+
+	    Acinetobacter baumannii strain FDA-CDC-AR_0308,polymyxin B,4,mg/L
+
+	    Acinetobacter baumannii strain MRSN7834,amoxicillin/clavulanic acid, 16/8,mg/L
+
+	Output CSV file example:
+	    Strain name,Colistin,Polymyxin B
+
+	    Acinetobacter baumannii A85,Strain could not be classified,NA
+
+	    Acinetobacter baumannii strain FDA-CDC-AR_0306,NA,Strain could not be classified
+
+	    Acinetobacter baumannii strain FDA-CDC-AR_0307,NA,Resistant
+
+	    Acinetobacter baumannii strain FDA-CDC-AR_0308,NA,Resistant
     ]]></help>
     <citations>
             <citation type="bibtex">@ARTICLE{Sharma_2021,
