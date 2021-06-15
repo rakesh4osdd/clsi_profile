@@ -21,7 +21,7 @@
    		</param>
    		<when value="clsi_file">
    			<param name="clsi1" type="select" format="csv" label="CSV File">
-   				<option value="clsi.csv" selected="true">CLSI MIC breakpoints for Bacteria (2020)</option>
+				<option value="test-data/clsi.csv" selected="true">CLSI MIC breakpoints for Bacteria (2020)</option>
    			</param>
    		</when>
    		<when value="user_file">
@@ -47,4 +47,16 @@
     <help><![CDATA[
         TODO: Fill in help.
     ]]></help>
+    <citations>
+            <citation type="bibtex">@ARTICLE{Sharma_2021,
+                        author = {Tina Sharma and Rakesh Kumar and Anshu Bhardwaj},
+                        title = {ASIST: Antimicrobial Susceptibility standards based phenotypes},
+                        journal = {},
+                        year = {2021},
+                        volume = {},
+                        pages = {},
+                        url = {https://ab-openlab.csir.res.in/asist}
+                    }
+            </citation>
+    </citations>	    
 </tool>
