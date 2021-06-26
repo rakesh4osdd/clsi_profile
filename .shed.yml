@@ -9,5 +9,6 @@ auto_tool_repositories:
     name_template: "{{ tool_id }}"
     description_template: "Antimicrobial Susceptibility standards (ASIST) from ASIST tool suite | {{ tool_id }}"
 suite:
-    name: "ASIST_tools_suite"
+    categories: Sequence Analysis
+    name: "suite_asist_tools"
     description: ASIST tools helps to find the phenotypes of strains from its CLSI based AST profiling

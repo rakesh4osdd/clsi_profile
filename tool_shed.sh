@@ -1,7 +1,4 @@
-planemo shed_init --name="clsi_profile" \
-                  --owner="rakesh4osdd" \
-                  --description="CLSI profile using MIC breakpoints" \
-                  --remote_repository_url="https://github.com/rakesh4osdd/clsi_profile/tree/master" \
-                  --homepage_url="https://github.com/rakesh4osdd/clsi_profile/tree/master" \
-                  --long_description="CLSI profile using MIC breakpoints" \
-                 # --category='' 
+#!/bin/bash
+# After reviewing .shed.yml, this configuration file and relevant shed artifacts can be quickly linted using the following command.
+planemo shed_lint --tools
+planemo shed_create --shed_target toolshed 
