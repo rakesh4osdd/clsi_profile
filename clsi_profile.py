@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[206]:
+# In[115]:
 
 
 # ASIST module2 | map AST result to the CLSI breakporints with combination antibiotics
@@ -11,13 +11,13 @@ import re
 import sys
 
 
-# In[207]:
+# In[116]:
 
 
 #print(pd.__version__, re.__version__)
 
 
-# In[208]:
+# In[117]:
 
 
 # compare two MIC value strings
@@ -95,9 +95,9 @@ def check_mic(mic1,mic2,mic_type):
             elif (mic_type=='i' and (float(m1a)==float(m2a))):
                 m_type='Intermediate'
             else:
-                m_type='Strain could not be classified-1'        
+                m_type='Strain could not be classified'        
     except IndexError:
-        strain_type='Strain could not be classified-2' 
+        strain_type='Strain could not be classified' 
         return(strain_type)
     
     return(m_type)
@@ -105,7 +105,7 @@ def check_mic(mic1,mic2,mic_type):
 #check_mic('65','32-64','i')
 
 
-# In[209]:
+# In[118]:
 
 
 # compare MIC value in pandas list
@@ -132,7 +132,7 @@ def sus_res_int(mic):
 #sus_res_int(mic)
 
 
-# In[210]:
+# In[119]:
 
 
 # for input argument
@@ -141,36 +141,57 @@ input_clsi = sys.argv[2]
 output_table = sys.argv[3]
 
 
-# In[211]:
+# In[3]:
 
-"""
-input_user='input.csv'
-input_clsi='clsi.csv'
-output_profile=input_user+'_profile.csv'
-output_table=input_user+'_table.csv'
-"""
 
-# In[212]:
+"""#input_user='~/Jupyterlab_notebook/ASIST_module/strain_profiles_16k.csv.csv'
+input_user='test-data/input2.csv'
+input_clsi='test-data/clsi.csv'
+output_profile='test-data/input2_profile.csv'
+output_table='test-data/input2_table.csv'
+#output_table='/home/rakesh/Jupyterlab_notebook/ASIST_module/strain_profiles_16k_table.csv'"""
+
+
+# In[146]:
 
 
 # read user AST data with selected 3 columns
 strain_mic=pd.read_csv(input_user, sep=',', usecols =['Strain name', 'Antibiotics', 'MIC'],na_filter=False)
+#strain_mic
 
 
-# In[213]:
+# In[147]:
 
 
 clsi_bp=pd.read_csv(input_clsi,sep=',')
 
+#clsi_bp[clsi_bp[['Antibiotics', 'Susceptible']].duplicated()].shape
 
-# In[214]:
+
+# In[148]:
 
 
 #clsi_bp
 #strain_mic
 
 
-# In[215]:
+# In[149]:
+
+
+input_dups=strain_mic[strain_mic[['Strain name','Antibiotics']].duplicated()]
+if (input_dups.shape[0] == 0):
+    #print( "No duplicates")
+    pass
+else:
+    input_dups.to_csv(output_table,na_rep='NA')
+    with open(output_table, "a") as file_object:
+    # Append 'hello' at the end of file
+        file_object.write('Input File Error: Please remove duplicate/mutiple MIC values for same combination of Strain name and Antibiotics from input file')
+    exit()
+#input_dups.head()
+
+
+# In[125]:
 
 
 # convert MIC to numbers sMIC, rMIC
@@ -179,13 +200,13 @@ clsi_bp['r_mic'] =clsi_bp[['Resistant']].applymap(lambda x: (re.sub(r'[^0-9.\/-]
 clsi_bp['i_mic'] = clsi_bp[['Intermediate']].applymap(lambda x: (re.sub(r'[^0-9.\/-]', '', x)))
 
 
-# In[216]:
+# In[126]:
 
 
 #clsi_bp['i_mic'] = clsi_bp[['Intermediate']].applymap(lambda x: (re.sub(r'[^0-9.\/-]', '', x)))
 
 
-# In[217]:
+# In[127]:
 
 
 # Read only numbers in MIC values
@@ -195,32 +216,46 @@ strain_mic['o_mic']=strain_mic[['MIC']].applymap(lambda x: (re.sub(r'[^0-9.\/]',
 #    print('Waring: Error in MIC value')
 
 
-# In[218]:
+# In[128]:
 
 
 #strain_mic
 
 
-# In[219]:
+# In[129]:
 
 
 # capitalize each Antibiotic Name for comparision with removing whitespace
+strain_mic['Strain name']=strain_mic['Strain name'].str.capitalize().str.replace(" ","")
 strain_mic['Antibiotics']=strain_mic['Antibiotics'].str.capitalize().str.replace(" ","")
+
 clsi_bp['Antibiotics']=clsi_bp['Antibiotics'].str.capitalize().str.replace(" ","")
 
 
-# In[220]:
+# In[130]:
 
 
-#compare CLSI Antibiotics only
-#result=pd.merge(strain_mic, clsi_bp, on='Antibiotics',how='inner',  indicator=True)[['Strain name','Antibiotics', 'MIC', 'o_mic', 's_mic', 'r_mic','_merge']]
-try:
-    result=pd.merge(strain_mic, clsi_bp, on='Antibiotics',how='inner')[['Strain name','Antibiotics', 'MIC', 'o_mic', 's_mic', 'r_mic','i_mic']]
-except KeyError:
-    print('Waring: Error in input Values')
+#find duplicate values in input files
+dups=strain_mic[strain_mic[['Strain name', 'Antibiotics']].duplicated(keep=False)]
+if dups.shape[0] != 0:
+    print ('Please provide a single MIC value in input file for given duplicates combination of \'Strain name and Antibiotics\' to use the tool:-\n',dups)
+    #exit()
+else:
+    #compare CLSI Antibiotics only
+    #result=pd.merge(strain_mic, clsi_bp, on='Antibiotics',how='inner',  indicator=True)[['Strain name','Antibiotics', 'MIC', 'o_mic', 's_mic', 'r_mic','_merge']]
+    try:
+        result=pd.merge(strain_mic, clsi_bp, on='Antibiotics',how='inner')[['Strain name','Antibiotics', 'MIC', 'o_mic', 's_mic', 'r_mic','i_mic']]
+    except KeyError:
+        print('Waring: Error in input Values')
 
 
-# In[221]:
+# In[131]:
+
+
+#result
+
+
+# In[132]:
 
 
 #compare MIC values and assign Susceptible and Resistant to Strain
@@ -230,19 +265,19 @@ result[['CLSI_profile']] = result[['o_mic','s_mic','r_mic','i_mic']].apply(sus_r
 #    print('Waring: Error in input MIC value')
 
 
-# In[222]:
+# In[133]:
 
 
 #result
 
 
-# In[223]:
+# In[134]:
 
 
 #result[['Strain name', 'Antibiotics', 'MIC','s_mic','r_mic','CLSI_profile']].to_csv(output_profile,sep=',', index=False, encoding='utf-8-sig')
 
 
-# In[224]:
+# In[135]:
 
 
 #create a pivot table for ASIST
@@ -250,55 +285,55 @@ table=result[['Strain name', 'Antibiotics','CLSI_profile']].drop_duplicates()
 result_table=pd.pivot_table(table, values ='CLSI_profile', index =['Strain name'],columns =['Antibiotics'], aggfunc = lambda x: ' '.join(x))
 
 
-# In[225]:
+# In[136]:
 
 
 #result_table
 
 
-# In[226]:
+# In[137]:
 
 
 #result_table.to_csv(output_table,na_rep='NA')
 
 
-# In[227]:
+# In[138]:
 
 
 # reorder the Antibiotics for ASIST
-clsi_ab=['Amikacin','Tobramycin','Gentamycin','Imipenem','Meropenem','Doripenem','Ciprofloxacin','Levofloxacin',
+clsi_ab=['Amikacin','Tobramycin','Gentamycin','Netilmicin','Imipenem','Meropenem','Doripenem','Ciprofloxacin','Levofloxacin',
          'Piperacillin/tazobactam','Ticarcillin/clavulanicacid','Cefotaxime','Ceftriaxone','Ceftazidime','Cefepime',
          'Trimethoprim/sulfamethoxazole','Ampicillin/sulbactam','Colistin','Polymyxinb','Tetracycline','Doxicycline ',
          'Minocycline']
 result_selected=result_table.filter(clsi_ab)
 
 
-# In[228]:
+# In[139]:
 
 
 #print(result_selected.shape, result_table.shape)
 
 
-# In[229]:
+# In[140]:
 
 
 #result_selected.insert(0,'Resistance_phenotype','')
 
 
-# In[230]:
+# In[141]:
 
 
 #rename headers
 result_selected=result_selected.rename(columns = {'Ticarcillin/clavulanicacid':'Ticarcillin/clavulanic acid','Piperacillin/tazobactam':'Piperacillin/ tazobactam','Trimethoprim/sulfamethoxazole': 'Trimethoprim/ sulfamethoxazole','Ampicillin/sulbactam':'Ampicillin/ sulbactam', 'Polymyxinb': 'Polymyxin B'} )
 
 
-# In[231]:
+# In[142]:
 
 
 #result_selected
 
 
-# In[232]:
+# In[144]:
 
 
 result_selected.to_csv(output_table,na_rep='NA')
