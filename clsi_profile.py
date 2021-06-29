@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[115]:
+# In[7]:
 
 
 # ASIST module2 | map AST result to the CLSI breakporints with combination antibiotics
@@ -11,13 +11,13 @@ import re
 import sys
 
 
-# In[116]:
+# In[8]:
 
 
 #print(pd.__version__, re.__version__)
 
 
-# In[117]:
+# In[9]:
 
 
 # compare two MIC value strings
@@ -105,7 +105,7 @@ def check_mic(mic1,mic2,mic_type):
 #check_mic('65','32-64','i')
 
 
-# In[118]:
+# In[10]:
 
 
 # compare MIC value in pandas list
@@ -132,7 +132,7 @@ def sus_res_int(mic):
 #sus_res_int(mic)
 
 
-# In[119]:
+# In[11]:
 
 
 # for input argument
@@ -141,18 +141,18 @@ input_clsi = sys.argv[2]
 output_table = sys.argv[3]
 
 
-# In[3]:
+# In[49]:
 
 
-"""#input_user='~/Jupyterlab_notebook/ASIST_module/strain_profiles_16k.csv.csv'
-input_user='test-data/input2.csv'
+"""input_user='~/Jupyterlab_notebook/ASIST_module/strain_profiles_16k.csv.csv'
+#input_user='test-data/input2.csv'
 input_clsi='test-data/clsi.csv'
 output_profile='test-data/input2_profile.csv'
-output_table='test-data/input2_table.csv'
-#output_table='/home/rakesh/Jupyterlab_notebook/ASIST_module/strain_profiles_16k_table.csv'"""
+#output_table='test-data/input2_table.csv'
+output_table='/home/rakesh/Jupyterlab_notebook/ASIST_module/strain_profiles_16k_table.csv'"""
 
 
-# In[146]:
+# In[60]:
 
 
 # read user AST data with selected 3 columns
@@ -160,7 +160,7 @@ strain_mic=pd.read_csv(input_user, sep=',', usecols =['Strain name', 'Antibiotic
 #strain_mic
 
 
-# In[147]:
+# In[61]:
 
 
 clsi_bp=pd.read_csv(input_clsi,sep=',')
@@ -168,30 +168,30 @@ clsi_bp=pd.read_csv(input_clsi,sep=',')
 #clsi_bp[clsi_bp[['Antibiotics', 'Susceptible']].duplicated()].shape
 
 
-# In[148]:
+# In[62]:
 
 
 #clsi_bp
 #strain_mic
 
 
-# In[149]:
+# In[64]:
 
 
+# warn user for duplicate files
 input_dups=strain_mic[strain_mic[['Strain name','Antibiotics']].duplicated()]
 if (input_dups.shape[0] == 0):
     #print( "No duplicates")
     pass
 else:
-    input_dups.to_csv(output_table,na_rep='NA')
-    with open(output_table, "a") as file_object:
+    with open(output_table, "w") as file_object:
     # Append 'hello' at the end of file
-        file_object.write('Input File Error: Please remove duplicate/mutiple MIC values for same combination of Strain name and Antibiotics from input file')
+        file_object.write('S.No.,Strain name,Antibiotics,MIC\nInput File Error: Please remove duplicate/mutiple MIC values for same combination of Strain name and Antibiotics from input file\n')
+    input_dups.to_csv(output_table,na_rep='NA', mode='a')
     exit()
-#input_dups.head()
 
 
-# In[125]:
+# In[17]:
 
 
 # convert MIC to numbers sMIC, rMIC
@@ -200,13 +200,13 @@ clsi_bp['r_mic'] =clsi_bp[['Resistant']].applymap(lambda x: (re.sub(r'[^0-9.\/-]
 clsi_bp['i_mic'] = clsi_bp[['Intermediate']].applymap(lambda x: (re.sub(r'[^0-9.\/-]', '', x)))
 
 
-# In[126]:
+# In[18]:
 
 
 #clsi_bp['i_mic'] = clsi_bp[['Intermediate']].applymap(lambda x: (re.sub(r'[^0-9.\/-]', '', x)))
 
 
-# In[127]:
+# In[19]:
 
 
 # Read only numbers in MIC values
@@ -216,13 +216,13 @@ strain_mic['o_mic']=strain_mic[['MIC']].applymap(lambda x: (re.sub(r'[^0-9.\/]',
 #    print('Waring: Error in MIC value')
 
 
-# In[128]:
+# In[20]:
 
 
 #strain_mic
 
 
-# In[129]:
+# In[21]:
 
 
 # capitalize each Antibiotic Name for comparision with removing whitespace
@@ -232,7 +232,7 @@ strain_mic['Antibiotics']=strain_mic['Antibiotics'].str.capitalize().str.replace
 clsi_bp['Antibiotics']=clsi_bp['Antibiotics'].str.capitalize().str.replace(" ","")
 
 
-# In[130]:
+# In[22]:
 
 
 #find duplicate values in input files
@@ -249,10 +249,10 @@ else:
         print('Waring: Error in input Values')
 
 
-# In[131]:
+# In[23]:
 
 
-#result
+dups.head()
 
 
 # In[132]:
