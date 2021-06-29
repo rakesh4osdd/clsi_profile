@@ -1,4 +1,4 @@
-<tool id="clsi_profile" name="CLSI Profile" version="0.1.6" python_template_version="3.5">
+<tool id="clsi_profile" name="CLSI Profile" version="0.1.7" python_template_version="3.5">
     <description>MIC profile using CLSI MIC breakpoints</description>
     <requirements>
         <requirement type="package">pandas</requirement>
