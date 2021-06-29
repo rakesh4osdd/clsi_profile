@@ -1,0 +1,14 @@
+category: "Sequence Analysis"
+description: CLSI profile using MIC breakpoints and Antimicrobial Susceptibility standards
+homepage_url: https://github.com/rakesh4osdd/clsi_profile/tree/master
+long_description: CLSI profile using MIC breakpoints for bacteria and Antimicrobial Susceptibility standards
+name: asist
+owner: rakesh4osdd
+remote_repository_url: https://github.com/rakesh4osdd/asist/tree/master
+auto_tool_repositories:
+    name_template: "{{ tool_id }}"
+    description_template: "Antimicrobial Susceptibility standards (ASIST) from ASIST tool suite | {{ tool_id }}"
+suite:
+    category: "Sequence Analysis"
+    name: "suite_asist_tools"
+    description: ASIST tools helps to find the phenotypes of strains from its CLSI based AST profiling

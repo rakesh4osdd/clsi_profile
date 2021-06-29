@@ -1,0 +1,48 @@
+<tool id="asist" name="ASIST" version="1.0.1" python_template_version="3.5">
+    <description>Antimicrobial Susceptibility standards based phenotypes</description>
+    <requirements>
+        <requirement type="package">pandas</requirement>
+    </requirements>
+    <version_command>python -c "import pandas; print(pandas.__version__)"</version_command>
+    <command detect_errors="exit_code"><![CDATA[
+	    "${__tool_directory__}/asist_dynamic.py" "$input1" "$output1"
+    ]]></command>
+    <inputs>
+        <param type="data" name="input1" format="csv" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="csv" from_work_dir="test-data/asist_output.csv" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="input1" value="test-data/asist_input.csv"/>
+            <output name="output1" file="test-data/asist_output.csv"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+        Input CSV file example:
+	    Strain name,Amikacin,Tobramycin,Gentamycin,Imipenem
+	    Strain name,Aminoglycoside,Aminoglycoside,Aminoglycoside,Beta-lactams-Carbapenems
+	    Acinetobacter baumannii strain FDA-CDC-AR_0288,Resistant,Resistant,Resistant,Resistant
+	    Acinetobacter baumannii strain FDA-CDC-AR_0303,Resistant,Resistant,Resistant,Resistant
+	    Acinetobacter baumannii strain FDA-CDC-AR_0304,NA,Resistant,Resistant,Resistant
+	Output CSV file example:
+	    Strain name,Strain phenotype,Amikacin,Tobramycin,Gentamycin,Imipenem
+	    Strain name,Strain could not be classified,Aminoglycoside,Aminoglycoside,Aminoglycoside,Beta-lactams-Carbapenems
+	    Acinetobacter baumannii strain FDA-CDC-AR_0288,Strain could not be classified,Resistant,Resistant,Resistant,Resistant
+	    Acinetobacter baumannii strain FDA-CDC-AR_0303,Strain could not be classified,Resistant,Resistant,Resistant,Resistant
+	    Acinetobacter baumannii strain FDA-CDC-AR_0304,Strain could not be classified,NA,Resistant,Resistant,Resistant
+    ]]></help>
+    <citations>
+	    <citation type="bibtex">@ARTICLE{Sharma_2021,
+		    	author = {Tina Sharma and Rakesh Kumar and Anshu Bhardwaj},
+		    	title = {ASIST: Antimicrobial Susceptibility standards based phenotypes},
+		    	journal = {},
+		        year = {2021},
+		    	volume = {},
+		    	pages = {},
+		    	url = {https://ab-openlab.csir.res.in/asist}
+		    }
+	    </citation>
+    </citations>
+</tool>

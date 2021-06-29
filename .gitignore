@@ -1,3 +1,9 @@
+.ipynb_checkpoints
+clsi_profile_type2.py
+clsi_profile_type2_linux-Copy1.ipynb
+dump
+*_table.csv
+*output.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +133,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.tool_shed.sh.swp
