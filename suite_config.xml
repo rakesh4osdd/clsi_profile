@@ -1,0 +1,9 @@
+<suite id='suite_asist_tools' name='Suite of ASIST tools' version="1.0.0">
+	<description>This suite contains clsi_profile and asist files and wrappers for Galaxy</description>
+	<tool id="clsi_profile" name="CLSI Profile" version="0.1.6" python_template_version="3.5">
+		<description>MIC profile using CLSI MIC breakpoints</description>	
+	</tool>
+	<tool id="asist" name="ASIST" version="1.0.1" python_template_version="3.5">
+		<description>Antimicrobial Susceptibility standards based phenotypes</description>
+	</tool>
+</suite>
